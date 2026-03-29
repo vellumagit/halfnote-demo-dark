@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Half Note — Scarborough's Event & Studio Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#0D0D0D;
+  --white:#161616;
+  --off:#111111;
+  --dark:#F0F0EE;
+  --near:#DEDEDD;
+  --mid:#AAAAAA;
+  --muted:#666666;
+  --faint:#333333;
+  --border:rgba(255,255,255,0.07);
+  --border-med:rgba(255,255,255,0.13);
+  --red:#D44333;
+  --red-soft:#E05545;
+  --red-bg:rgba(212,67,51,0.1);
+  --red-border:rgba(212,67,51,0.25);
+  --display:'Fraunces',Georgia,serif;
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--cream);color:var(--dark);line-height:1.6;font-weight:300;overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 4rem;
+  background:rgba(13,13,13,0.94);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--display);font-size:1.4rem;font-weight:400;font-style:italic;
+  color:var(--dark);text-decoration:none;
+  display:flex;align-items:center;gap:0.55rem;
+}
+.logo-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--red);flex-shrink:0;
+  animation:breathe 3s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
+.nav-links a{
+  font-size:0.78rem;font-weight:400;letter-spacing:0.07em;
+  color:var(--muted);text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--dark);}
+.nav-cta{
+  background:var(--red) !important;color:#fff !important;
+  padding:0.58rem 1.5rem;border-radius:100px;
+  font-weight:500 !important;
+  transition:opacity 0.2s,transform 0.15s !important;
+}
+.nav-cta:hover{opacity:0.85 !important;transform:translateY(-1px);}
+
+/* HERO */
+.hero{
+  min-height:100vh;padding-top:72px;
+  display:grid;grid-template-columns:1.1fr 0.9fr;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:5rem 4.5rem 5rem 4rem;
+  border-right:1px solid var(--border);
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:0.7rem;
+  font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:2.2rem;
+}
+.eyebrow-bar{width:24px;height:1.5px;background:var(--red);}
+.eyebrow-hi{color:var(--red);}
+
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(3.5rem,5.8vw,6.2rem);
+  font-weight:300;line-height:1.05;
+  color:var(--dark);margin-bottom:1.8rem;
+}
+.hero h1 em{font-style:italic;display:block;}
+.hero h1 .accent{color:var(--red);}
+.hero h1 .ghost{font-style:italic;display:block;}
+.hero h1 .highlight{
+  background:var(--red);color:#fff;
+  padding:0.04em 0.22em;border-radius:4px;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+  font-style:italic;
+}
+
+.hero-sub{
+  font-size:0.98rem;color:var(--muted);
+  max-width:430px;line-height:1.95;margin-bottom:3rem;
+  font-weight:300;
+}
+
+.hero-actions{display:flex;gap:1rem;align-items:center;}
+.btn-primary{
+  background:var(--red);color:#fff;
+  padding:0.95rem 2.2rem;border-radius:100px;
+  font-family:var(--sans);font-size:0.82rem;font-weight:500;
+  text-decoration:none;letter-spacing:0.05em;
+  transition:opacity 0.2s,transform 0.15s;
+}
+.btn-primary:hover{opacity:0.85;transform:translateY(-1px);}
+.btn-outline{
+  color:var(--dark);font-size:0.82rem;font-weight:400;
+  text-decoration:none;display:flex;align-items:center;gap:0.45rem;
+  letter-spacing:0.04em;
+  border-bottom:1px solid var(--border-med);padding-bottom:1px;
+  transition:border-color 0.2s,gap 0.2s;
+}
+.btn-outline:hover{border-color:var(--dark);gap:0.7rem;}
+.btn-outline::after{content:'→';}
+
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;padding-top:2.5rem;
+  border-top:1px solid var(--border);
+}
+.stat-num{
+  font-family:var(--display);font-size:2.5rem;font-weight:300;font-style:italic;
+  color:var(--dark);display:block;
+}
+.stat-label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-top:0.1rem;}
+
+/* HERO RIGHT */
+.hero-right{
+  background:var(--off);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:3rem;position:relative;overflow:hidden;
+}
+.hero-right-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0.18;
+}
+.hero-bg-circle{
+  position:absolute;
+  width:360px;height:360px;border-radius:50%;
+  border:1px solid rgba(20,20,20,0.06);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-bg-circle.c2{width:240px;height:240px;border-color:rgba(20,20,20,0.05);}
+.hero-bg-circle.c3{
+  width:120px;height:120px;
+  background:var(--red-bg);border-color:var(--red-border);
+}
+.waveform-row{
+  display:flex;align-items:center;gap:2.5px;
+  height:44px;margin-bottom:1.5rem;
+  position:relative;z-index:1;
+}
+.w-bar{
+  flex:1;border-radius:10px;
+  background:var(--dark);opacity:0.12;
+  animation:wv 1.2s ease-in-out infinite;
+  transform-origin:center;
+}
+.w-bar.accent-bar{background:var(--red);opacity:0.5;}
+@keyframes wv{0%,100%{transform:scaleY(0.12);}50%{transform:scaleY(1);}}
+
+.location-chip{
+  position:relative;z-index:1;
+  background:rgba(22,22,22,0.92);
+  border:1px solid var(--border);
+  border-radius:12px;padding:1rem 1.3rem;
+  display:inline-block;
+  backdrop-filter:blur(8px);
+}
+.chip-label{font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.chip-val{font-size:0.88rem;color:var(--dark);font-weight:400;}
+
+.hero-tags-col{
+  display:flex;flex-direction:column;gap:0.5rem;
+  position:absolute;top:3rem;left:3rem;z-index:1;
+}
+.htag-sm{
+  font-size:0.68rem;font-weight:400;letter-spacing:0.06em;
+  padding:0.3rem 0.8rem;border-radius:100px;
+  background:var(--white);border:1px solid var(--border);
+  color:var(--muted);width:fit-content;
+}
+.htag-sm.red{background:var(--red-bg);border-color:var(--red-border);color:var(--red);}
+
+/* STRIP */
+.strip{
+  background:var(--dark);padding:0.85rem 0;overflow:hidden;
+}
+.strip-track{display:flex;animation:mscroll 28s linear infinite;width:max-content;}
+@keyframes mscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.s-item{
+  font-family:var(--display);font-style:italic;font-size:1rem;
+  color:rgba(250,250,248,0.45);white-space:nowrap;
+  padding:0 2rem;display:flex;align-items:center;gap:2rem;
+}
+.s-item.hi{color:rgba(250,250,248,0.85);}
+.s-sep{width:3px;height:3px;border-radius:50%;background:rgba(250,250,248,0.15);}
+
+/* SECTION */
+.section{padding:7rem 4rem;}
+.s-label{
+  display:flex;align-items:center;gap:0.6rem;
+  font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.2rem;
+}
+.s-label::before{content:'';width:16px;height:1px;background:var(--red);}
+.s-label.red-label{color:var(--red);}
+.s-h2{
+  font-family:var(--display);
+  font-size:clamp(2.6rem,4.5vw,4.8rem);
+  font-weight:300;line-height:1.05;
+  color:var(--dark);margin-bottom:1.2rem;
+}
+.s-h2 em{font-style:italic;}
+.s-h2 .red-em{font-style:italic;color:var(--red);}
+.s-lead{font-size:0.95rem;color:var(--muted);max-width:480px;line-height:1.95;margin-bottom:3.5rem;font-weight:300;}
+
+/* SPACE */
+.space-section{background:var(--white);}
+.space-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.f-list{margin-top:2rem;display:flex;flex-direction:column;}
+.f-row{
+  display:flex;gap:1.4rem;align-items:flex-start;
+  padding:1.4rem 0;border-bottom:1px solid var(--border);
+}
+.f-row:first-child{border-top:1px solid var(--border);}
+.f-n{
+  font-family:var(--display);font-size:0.9rem;font-style:italic;
+  color:var(--faint);width:20px;flex-shrink:0;margin-top:3px;
+}
+.f-name{font-size:0.82rem;font-weight:500;color:var(--dark);margin-bottom:0.25rem;letter-spacing:0.02em;}
+.f-desc{font-size:0.8rem;color:var(--muted);line-height:1.8;}
+
+.sp-visual{display:flex;flex-direction:column;gap:10px;}
+.sp-main{
+  aspect-ratio:4/3;border-radius:20px;
+  background:var(--off);
+  display:flex;align-items:flex-end;padding:1.5rem;
+  position:relative;overflow:hidden;
+}
+.sp-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.sp-t{aspect-ratio:4/3;border-radius:12px;background:var(--off);overflow:hidden;}
+.sp-t img{width:100%;height:100%;object-fit:cover;display:block;}
+.sp-main::before{
+  content:'';position:absolute;
+  bottom:-20px;right:-20px;
+  width:180px;height:180px;border-radius:50%;
+  background:var(--red-bg);
+}
+.sp-cap{
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--mid);background:rgba(0,0,0,0.7);
+  padding:0.4rem 0.9rem;border-radius:100px;position:relative;z-index:1;
+}
+.sp-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+
+/* FLOOR PLAN */
+.floorplan-section{background:var(--cream);}
+.floorplan-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.floorplan-img-wrap{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.floorplan-img-wrap img{width:100%;height:auto;display:block;opacity:0.85;filter:invert(1);}
+.floorplan-specs{margin-top:2.5rem;display:flex;flex-direction:column;}
+.spec-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:1.1rem 0;border-bottom:1px solid var(--border);
+}
+.spec-row:first-child{border-top:1px solid var(--border);}
+.spec-label{font-size:0.78rem;font-weight:400;color:var(--muted);}
+.spec-val{font-family:var(--display);font-size:1rem;font-style:italic;color:var(--dark);}
+
+/* EVENTS */
+.events-section{background:var(--cream);}
+.events-section>.s-label,.events-section>.s-h2,.events-section>.s-lead{text-align:center;}
+.events-section>.s-label{justify-content:center;}
+.events-section>.s-lead{margin-left:auto;margin-right:auto;}
+.events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}
+.ev-card{
+  background:var(--cream);padding:2.5rem;
+  display:flex;flex-direction:column;gap:0.9rem;
+  transition:background 0.25s;cursor:default;
+}
+.ev-card:hover{background:var(--white);}
+.ev-num{
+  font-family:var(--display);font-size:0.88rem;font-style:italic;
+  color:var(--faint);margin-bottom:0.2rem;
+}
+.ev-tag{
+  font-size:0.65rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--red);width:fit-content;
+}
+.ev-title{font-family:var(--display);font-size:1.9rem;font-weight:300;font-style:italic;color:var(--dark);line-height:1.1;}
+.ev-desc{font-size:0.82rem;color:var(--muted);line-height:1.85;max-width:340px;}
+
+/* BANNER */
+.banner{
+  background:var(--dark);
+  padding:5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:3rem;
+}
+.banner-text{
+  font-family:var(--display);
+  font-size:clamp(2.4rem,4.2vw,4rem);
+  font-weight:300;font-style:italic;
+  line-height:1.1;color:var(--cream);
+  max-width:600px;
+}
+.banner-text em{font-style:normal;color:var(--red-soft);}
+.btn-cream{
+  background:var(--cream);color:var(--dark);
+  padding:1rem 2.4rem;border-radius:100px;
+  font-family:var(--sans);font-size:0.82rem;font-weight:500;
+  text-decoration:none;letter-spacing:0.05em;flex-shrink:0;
+  transition:opacity 0.2s,transform 0.15s;
+}
+.btn-cream:hover{opacity:0.85;transform:translateY(-1px);}
+
+/* WHY */
+.why-section{background:var(--white);}
+.why-section>.s-label,.why-section>.s-h2{text-align:center;}
+.why-section>.s-label{justify-content:center;}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.why-card{
+  padding:2.2rem;border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--cream);
+  transition:border-color 0.25s;
+}
+.why-card:hover{border-color:var(--border-med);}
+.why-n{font-family:var(--display);font-size:2.2rem;font-style:italic;font-weight:300;color:var(--red);opacity:0.3;display:block;margin-bottom:1.2rem;}
+.why-t{font-size:0.8rem;font-weight:500;color:var(--dark);margin-bottom:0.6rem;letter-spacing:0.04em;}
+.why-d{font-size:0.82rem;color:var(--muted);line-height:1.9;}
+
+/* REVIEWS */
+.reviews-section{background:var(--cream);padding:7rem 0;}
+.reviews-section>.s-label,.reviews-section>.s-h2{text-align:center;padding:0 4rem;}
+.reviews-section>.s-label{justify-content:center;}
+.rv-scroll-wrap{overflow:hidden;margin-top:3.5rem;}
+.rv-track{
+  display:flex;gap:1.2rem;
+  animation:rv-scroll 40s linear infinite;
+  width:max-content;
+}
+.rv-track:hover{animation-play-state:paused;}
+@keyframes rv-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.rv-card{
+  background:var(--white);border-radius:16px;
+  border:1px solid var(--border);
+  padding:1.8rem;display:flex;flex-direction:column;gap:1rem;
+  width:320px;flex-shrink:0;
+}
+.rv-stars{color:var(--red);font-size:12px;letter-spacing:3px;}
+.rv-text{font-family:var(--display);font-style:italic;font-size:0.95rem;font-weight:300;color:var(--dark);line-height:1.75;}
+.rv-author{display:flex;align-items:center;gap:0.8rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border);}
+.rv-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--red-bg);border:1px solid var(--red-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:500;color:var(--red);flex-shrink:0;
+}
+.rv-name{font-size:0.82rem;font-weight:500;color:var(--dark);}
+.rv-event{font-size:0.72rem;color:var(--muted);}
+.rv-all-link{
+  text-align:center;margin-top:2.5rem;padding:0 4rem;
+}
+.rv-all-link a{
+  font-size:0.8rem;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--border-med);padding-bottom:1px;
+  letter-spacing:0.04em;transition:color 0.2s,border-color 0.2s;
+}
+.rv-all-link a:hover{color:var(--dark);border-color:var(--dark);}
+
+/* BOOKING */
+.booking-section{
+  background:var(--white);
+  display:grid;grid-template-columns:1fr 1fr;
+  padding:7rem 4rem;gap:6rem;align-items:start;
+}
+.meta-list{margin-top:2.5rem;}
+.meta-row{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.3rem 0;border-bottom:1px solid var(--border);
+}
+.meta-row:first-child{border-top:1px solid var(--border);}
+.meta-label{font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.meta-val{font-size:0.9rem;color:var(--dark);font-weight:400;}
+.meta-dash{font-family:var(--display);font-style:italic;color:var(--red);opacity:0.4;flex-shrink:0;margin-top:3px;}
+
+.form-box{
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+}
+.form-title{font-family:var(--display);font-size:2.6rem;font-style:italic;font-weight:300;color:var(--dark);margin-bottom:0.3rem;line-height:1.05;}
+.form-sub{font-size:0.8rem;color:var(--muted);margin-bottom:2rem;}
+.form-field{margin-bottom:1.1rem;}
+.form-field label{display:block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.45rem;}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;padding:0.85rem 1.1rem;
+  background:#0D0D0D;border:1px solid var(--border);
+  border-radius:10px;font-family:var(--sans);font-size:0.88rem;
+  color:var(--dark);outline:none;transition:border-color 0.2s;appearance:none;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--red);}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--faint);}
+.form-field textarea{resize:vertical;min-height:88px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.submit-btn{
+  width:100%;padding:1rem;
+  background:var(--red);color:#fff;
+  border:none;border-radius:100px;
+  font-family:var(--sans);font-size:0.82rem;font-weight:500;
+  letter-spacing:0.06em;cursor:pointer;
+  transition:opacity 0.2s,transform 0.15s;margin-top:0.5rem;
+}
+.submit-btn:hover{opacity:0.85;transform:translateY(-1px);}
+
+/* FOOTER */
+footer{background:#080808;padding:4rem 4rem 2.5rem;}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;
+  padding-bottom:3rem;border-bottom:1px solid rgba(250,250,248,0.07);margin-bottom:2rem;
+}
+.footer-brand{
+  font-family:var(--display);font-size:1.5rem;font-weight:400;font-style:italic;
+  color:var(--cream);margin-bottom:0.8rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.f-dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+.footer-tag{font-size:0.83rem;color:rgba(250,250,248,0.4);line-height:1.9;max-width:260px;}
+.f-col-title{font-size:0.63rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(250,250,248,0.3);margin-bottom:1.4rem;}
+.f-links{list-style:none;}
+.f-links li{margin-bottom:0.8rem;}
+.f-links a{font-size:0.83rem;color:rgba(250,250,248,0.4);text-decoration:none;transition:color 0.2s;}
+.f-links a:hover{color:var(--cream);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+.footer-bottom span{font-size:0.7rem;color:rgba(250,250,248,0.18);letter-spacing:0.06em;}
+.social-links{display:flex;gap:0.75rem;margin-top:1.4rem;}
+.social-link{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(250,250,248,0.12);
+  color:rgba(250,250,248,0.45);
+  text-decoration:none;transition:border-color 0.2s,color 0.2s;
+}
+.social-link:hover{border-color:rgba(250,250,248,0.4);color:var(--cream);}
+.social-link svg{width:16px;height:16px;fill:currentColor;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links .hide-mobile{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:4rem 1.5rem;}
+  .section{padding:5rem 1.5rem;}
+  .space-grid,.floorplan-grid,.booking-section{grid-template-columns:1fr;gap:3rem;}
+  .events-grid,.why-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;gap:2.5rem;}
+  .banner{flex-direction:column;padding:3.5rem 1.5rem;gap:2rem;}
+  .reviews-section{padding:5rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="logo-dot"></span>
+    Half Note
+  </a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="#space">The Space</a></li>
+    <li class="hide-mobile"><a href="#events">Events</a></li>
+    <li class="hide-mobile"><a href="#booking">Contact</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-bar"></span>
+      <span class="eyebrow-hi">Scarborough, Toronto</span>
+      <span>· Est. 2025</span>
+    </div>
+    <h1>
+      Your space<br>
+      <em>to <span class="accent">celebrate,</span></em>
+      <span class="ghost"><span class="highlight">create &amp; connect.</span></span>
+    </h1>
+    <p class="hero-sub">A warm, 2,900 sqft event and studio space in Scarborough — made for birthdays, shoots, shows, workshops, and everything worth gathering for.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Check Availability</a>
+      <a href="#space" class="btn-outline">See the space</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">2,900</span><span class="stat-label">Sq. feet</span></div>
+      <div><span class="stat-num">100+</span><span class="stat-label">Capacity</span></div>
+      <div><span class="stat-num">3 hr</span><span class="stat-label">Min. booking</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-right-img" src="https://halfnote416.com/wp-content/uploads/2025/02/e9dbb569-5dac-407a-b117-44f56015ba15.jpg" alt="Half Note event space">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-bg-circle c2"></div>
+    <div class="hero-bg-circle c3"></div>
+    <div class="hero-tags-col">
+      <span class="htag-sm red">Event Space</span>
+      <span class="htag-sm">Photo Studio</span>
+      <span class="htag-sm">Live Venue</span>
+      <span class="htag-sm">Scarborough</span>
+    </div>
+    <div class="waveform-row" id="waveform"></div>
+    <div class="location-chip">
+      <div class="chip-label">Find us at</div>
+      <div class="chip-val">3357 Kingston Rd · Scarborough ON</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-track">
+    <div class="s-item hi">Birthdays<span class="s-sep"></span></div>
+    <div class="s-item">Photo Shoots<span class="s-sep"></span></div>
+    <div class="s-item hi">Wedding Receptions<span class="s-sep"></span></div>
+    <div class="s-item">Live Podcasts<span class="s-sep"></span></div>
+    <div class="s-item hi">Music Videos<span class="s-sep"></span></div>
+    <div class="s-item">Corporate Events<span class="s-sep"></span></div>
+    <div class="s-item hi">Comedy Shows<span class="s-sep"></span></div>
+    <div class="s-item">Yoga & Wellness<span class="s-sep"></span></div>
+    <div class="s-item hi">Sip & Paint<span class="s-sep"></span></div>
+    <div class="s-item">Baby Showers<span class="s-sep"></span></div>
+    <div class="s-item hi">Birthdays<span class="s-sep"></span></div>
+    <div class="s-item">Photo Shoots<span class="s-sep"></span></div>
+    <div class="s-item hi">Wedding Receptions<span class="s-sep"></span></div>
+    <div class="s-item">Live Podcasts<span class="s-sep"></span></div>
+    <div class="s-item hi">Music Videos<span class="s-sep"></span></div>
+    <div class="s-item">Corporate Events<span class="s-sep"></span></div>
+    <div class="s-item hi">Comedy Shows<span class="s-sep"></span></div>
+    <div class="s-item">Yoga & Wellness<span class="s-sep"></span></div>
+    <div class="s-item hi">Sip & Paint<span class="s-sep"></span></div>
+    <div class="s-item">Baby Showers<span class="s-sep"></span></div>
+  </div>
+</div>
+
+<!-- SPACE -->
+<section class="section space-section" id="space">
+  <div class="space-grid">
+    <div>
+      <div class="s-label">The Space</div>
+      <h2 class="s-h2">Made to fit<br><em>any <span class="red-em">occasion.</span></em></h2>
+      <p class="s-lead">2,900 sqft of open-concept space that bends to your vision. Two kitchens, garage doors that let the outside in, and everything you need — included.</p>
+      <div class="f-list">
+        <div class="f-row">
+          <span class="f-n">01</span>
+          <div><div class="f-name">Two Kitchens</div><div class="f-desc">A full presentation kitchen plus a separate prep kitchen — for catering, cooking workshops, or food shoots.</div></div>
+        </div>
+        <div class="f-row">
+          <span class="f-n">02</span>
+          <div><div class="f-name">Roll-up Garage Doors</div><div class="f-desc">Open them wide for natural light, a breezy summer feel, or easy equipment load-in.</div></div>
+        </div>
+        <div class="f-row">
+          <span class="f-n">03</span>
+          <div><div class="f-name">Furniture Included</div><div class="f-desc">Tables, chairs, and catering gear are all there. Set up however you need it.</div></div>
+        </div>
+        <div class="f-row">
+          <span class="f-n">04</span>
+          <div><div class="f-name">WiFi & Climate Control</div><div class="f-desc">Fast WiFi and heating throughout. Your event runs smooth, every season.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sp-visual">
+      <div class="sp-main">
+        <img src="https://halfnote416.com/wp-content/uploads/2025/02/2dd7ccad-fb51-426a-b9c1-b3f0473adbc5.jpg" alt="Half Note main floor">
+        <span class="sp-cap">Main floor — open concept</span>
+      </div>
+      <div class="sp-thumbs">
+        <div class="sp-t"><img src="https://halfnote416.com/wp-content/uploads/2025/02/847c75f2-68ea-414e-8b88-61d0b19ea9b4.jpg" alt="Half Note space"></div>
+        <div class="sp-t"><img src="https://halfnote416.com/wp-content/uploads/2025/02/b92fdd79-3f0c-497f-afef-a285e6b65f1f.jpg" alt="Half Note space"></div>
+        <div class="sp-t"><img src="https://halfnote416.com/wp-content/uploads/2025/02/51fc0062-701c-49f1-8a4a-f076cd1dcfc1.jpg" alt="Half Note space"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOOR PLAN -->
+<section class="section floorplan-section">
+  <div class="floorplan-grid">
+    <div class="floorplan-img-wrap">
+      <img src="https://halfnote416.com/wp-content/uploads/2025/02/Space-Layout_white.png" alt="Half Note floor plan">
+    </div>
+    <div>
+      <div class="s-label">Floor Plan</div>
+      <h2 class="s-h2">Built for<br><em>every <span class="red-em">setup.</span></em></h2>
+      <p class="s-lead">2,900 sqft of open-concept space designed to flex around your vision — whether that's banquet rows, a lounge layout, a live stage, or a full production set.</p>
+      <div class="floorplan-specs">
+        <div class="spec-row"><span class="spec-label">Total Area</span><span class="spec-val">2,900 sq ft</span></div>
+        <div class="spec-row"><span class="spec-label">Dimensions</span><span class="spec-val">47ft × 37ft open floor</span></div>
+        <div class="spec-row"><span class="spec-label">Kitchens</span><span class="spec-val">Presentation kitchen + prep kitchen</span></div>
+        <div class="spec-row"><span class="spec-label">Bathrooms</span><span class="spec-val">Two multi-gender washrooms</span></div>
+        <div class="spec-row"><span class="spec-label">Garage Doors</span><span class="spec-val">2 roll-up doors — load in &amp; natural light</span></div>
+        <div class="spec-row"><span class="spec-label">Capacity</span><span class="spec-val">Up to 100 guests</span></div>
+        <div class="spec-row"><span class="spec-label">Min. Booking</span><span class="spec-val">3 hours</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section events-section" id="events">
+  <div class="s-label">What's Possible</div>
+  <h2 class="s-h2">Whatever you're<br><em>planning,</em> we've got you.</h2>
+  <p class="s-lead">Half Note was built to hold all kinds of gatherings — from the sentimental to the spectacular.</p>
+  <div class="events-grid">
+    <div class="ev-card">
+      <div class="ev-num">01</div>
+      <div class="ev-tag">Celebrate</div>
+      <div class="ev-title">Birthdays & Milestones</div>
+      <div class="ev-desc">Birthdays, baby showers, wedding celebrations, anniversaries — intimate gatherings or a full 100-person party.</div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-num">02</div>
+      <div class="ev-tag">Perform</div>
+      <div class="ev-title">Live Events & Shows</div>
+      <div class="ev-desc">Comedy nights, live podcast tapings, open mics, corporate presentations. Your audience is waiting.</div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-num">03</div>
+      <div class="ev-tag">Create</div>
+      <div class="ev-title">Photo & Video Shoots</div>
+      <div class="ev-desc">Music videos, brand shoots, lookbooks, content days. A versatile backdrop for every creative brief.</div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-num">04</div>
+      <div class="ev-tag">Connect</div>
+      <div class="ev-title">Workshops & Wellness</div>
+      <div class="ev-desc">Yoga classes, sip & paint nights, cooking workshops, community meetups — experiences that bring people together.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-text">
+    Scarborough deserves<br>a beautiful space.<br>
+    <em>This is it.</em>
+  </div>
+  <a href="#booking" class="btn-cream">Reserve the Space →</a>
+</div>
+
+<!-- WHY -->
+<section class="section why-section">
+  <div class="s-label">Why Half Note</div>
+  <h2 class="s-h2">A space that<br><em>feels like <span class="red-em">home.</span></em></h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-n">01</span>
+      <div class="why-t">Rooted in Scarborough</div>
+      <div class="why-d">Community first, every booking. Half Note was built because Kingston Rd deserved a venue that actually feels like it belongs here — warm, welcoming, and genuinely 416.</div>
+    </div>
+    <div class="why-card">
+      <span class="why-n">02</span>
+      <div class="why-t">Everything included</div>
+      <div class="why-d">Furniture, kitchens, WiFi, heating — it's all part of the booking. No surprise charges, no nickel-and-diming. Just your event, fully supported.</div>
+    </div>
+    <div class="why-card">
+      <span class="why-n">03</span>
+      <div class="why-t">Truly yours to shape</div>
+      <div class="why-d">Birthday setup? Studio shoot? Yoga class? The floor plan flexes around you — not a template someone else designed for someone else's event.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="s-label">Kind Words</div>
+  <h2 class="s-h2">97 Google reviews. <em>All five stars.</em></h2>
+  <div class="rv-scroll-wrap">
+    <div class="rv-track">
+      <!-- Set 1 -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"We had so much fun at a pop up Mary Jane and Paint event! We would definitely do it again. So worth it."</div>
+        <div class="rv-author"><div class="rv-avatar">KW</div><div><div class="rv-name">Kayla Warburton</div><div class="rv-event">Pop-Up Event · Local Guide</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Held a University of Toronto, Scarborough event in this beautiful, versatile event place and it was absolutely perfect. Omar spent so much time with me before the event to ensure the place was set up perfectly."</div>
+        <div class="rv-author"><div class="rv-avatar">JG</div><div><div class="rv-name">Julia Gruson-Wood</div><div class="rv-event">University Event</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Favourite event space in the GTA. So unique and versatile. The owner of venue is so kind, resourceful, and is dedicated to making sure your event runs smoothly."</div>
+        <div class="rv-author"><div class="rv-avatar">NM</div><div><div class="rv-name">Nafisa Mohamed</div><div class="rv-event">Event Space</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Hosted my baby shower at Half Notes and the team here went above and beyond to make my event the perfect memory! The owner was amazing and so easy to work with."</div>
+        <div class="rv-author"><div class="rv-avatar">KJ</div><div><div class="rv-name">Kamilah Jade</div><div class="rv-event">Baby Shower</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"I recently booked Half Note 416 for my son's birthday, and I couldn't be happier. The space is even larger than it appears online. From start to finish, the customer service was exceptional."</div>
+        <div class="rv-author"><div class="rv-avatar">AM</div><div><div class="rv-name">Akrem Mohammed</div><div class="rv-event">Birthday Party</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"I've attended multiple events at Half Note 416 — networking sessions, birthday parties, an engagement celebration, and a comedy show — and every single experience has been outstanding."</div>
+        <div class="rv-author"><div class="rv-avatar">WJ</div><div><div class="rv-name">Wassim Jami</div><div class="rv-event">Multiple Events · Local Guide</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"We hosted a poetry + talent showcase night at the HalfNote 416. The atmosphere was perfect for our event. Omar the owner was great to work with."</div>
+        <div class="rv-author"><div class="rv-avatar">KB</div><div><div class="rv-name">Kheneil Black</div><div class="rv-event">Poetry Showcase · Local Guide</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"I recently took my wife on a date to Half Note to watch a comedy show, and we both had an incredible time! From the moment we walked in, the atmosphere was warm and inviting."</div>
+        <div class="rv-author"><div class="rv-avatar">WP</div><div><div class="rv-name">Wealth for Purpose</div><div class="rv-event">Comedy Night</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Excellent venue! This speak easy style space is perfect for any kind of event — the space is so workable and can be transformed to fit any occasion! I hosted a 30th birthday games night and it had all the amenities I needed."</div>
+        <div class="rv-author"><div class="rv-avatar">MG</div><div><div class="rv-name">Marquel Ganesh</div><div class="rv-event">30th Birthday · Games Night</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"10/10. The space is amazing for any type of outing. The customer service is top notch. We had a book club there and this is definitely my best venue so far in Scarborough."</div>
+        <div class="rv-author"><div class="rv-avatar">WE</div><div><div class="rv-name">Wonegou Eunice</div><div class="rv-event">Book Club</div></div></div>
+      </div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"We had so much fun at a pop up Mary Jane and Paint event! We would definitely do it again. So worth it."</div>
+        <div class="rv-author"><div class="rv-avatar">KW</div><div><div class="rv-name">Kayla Warburton</div><div class="rv-event">Pop-Up Event · Local Guide</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Held a University of Toronto, Scarborough event in this beautiful, versatile event place and it was absolutely perfect. Omar spent so much time with me before the event to ensure the place was set up perfectly."</div>
+        <div class="rv-author"><div class="rv-avatar">JG</div><div><div class="rv-name">Julia Gruson-Wood</div><div class="rv-event">University Event</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Favourite event space in the GTA. So unique and versatile. The owner of venue is so kind, resourceful, and is dedicated to making sure your event runs smoothly."</div>
+        <div class="rv-author"><div class="rv-avatar">NM</div><div><div class="rv-name">Nafisa Mohamed</div><div class="rv-event">Event Space</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Hosted my baby shower at Half Notes and the team here went above and beyond to make my event the perfect memory! The owner was amazing and so easy to work with."</div>
+        <div class="rv-author"><div class="rv-avatar">KJ</div><div><div class="rv-name">Kamilah Jade</div><div class="rv-event">Baby Shower</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"I recently booked Half Note 416 for my son's birthday, and I couldn't be happier. The space is even larger than it appears online. From start to finish, the customer service was exceptional."</div>
+        <div class="rv-author"><div class="rv-avatar">AM</div><div><div class="rv-name">Akrem Mohammed</div><div class="rv-event">Birthday Party</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"I've attended multiple events at Half Note 416 — networking sessions, birthday parties, an engagement celebration, and a comedy show — and every single experience has been outstanding."</div>
+        <div class="rv-author"><div class="rv-avatar">WJ</div><div><div class="rv-name">Wassim Jami</div><div class="rv-event">Multiple Events · Local Guide</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"We hosted a poetry + talent showcase night at the HalfNote 416. The atmosphere was perfect for our event. Omar the owner was great to work with."</div>
+        <div class="rv-author"><div class="rv-avatar">KB</div><div><div class="rv-name">Kheneil Black</div><div class="rv-event">Poetry Showcase · Local Guide</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"I recently took my wife on a date to Half Note to watch a comedy show, and we both had an incredible time! From the moment we walked in, the atmosphere was warm and inviting."</div>
+        <div class="rv-author"><div class="rv-avatar">WP</div><div><div class="rv-name">Wealth for Purpose</div><div class="rv-event">Comedy Night</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"Excellent venue! This speak easy style space is perfect for any kind of event — the space is so workable and can be transformed to fit any occasion! I hosted a 30th birthday games night and it had all the amenities I needed."</div>
+        <div class="rv-author"><div class="rv-avatar">MG</div><div><div class="rv-name">Marquel Ganesh</div><div class="rv-event">30th Birthday · Games Night</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-text">"10/10. The space is amazing for any type of outing. The customer service is top notch. We had a book club there and this is definitely my best venue so far in Scarborough."</div>
+        <div class="rv-author"><div class="rv-avatar">WE</div><div><div class="rv-name">Wonegou Eunice</div><div class="rv-event">Book Club</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="rv-all-link">
+    <a href="https://maps.google.com/maps?cid=0x89d4cf13ff8afb4f:0x95426595c14072a7" target="_blank" rel="noopener">See all 97 Google reviews →</a>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div>
+    <div class="s-label red-label">Book the Space</div>
+    <h2 class="s-h2">Let's make your<br><em>event <span class="red-em">happen.</span></em></h2>
+    <p class="s-lead">Fill out the form and we'll get back to you quickly. We'd love to hear what you're planning.</p>
+    <div class="meta-list">
+      <div class="meta-row">
+        <span class="meta-dash">—</span>
+        <div><div class="meta-label">Location</div><div class="meta-val">3357 Kingston Rd, Scarborough ON M1M 1R3</div></div>
+      </div>
+      <div class="meta-row">
+        <span class="meta-dash">—</span>
+        <div><div class="meta-label">Phone</div><div class="meta-val">(416) 707-2216</div></div>
+      </div>
+      <div class="meta-row">
+        <span class="meta-dash">—</span>
+        <div><div class="meta-label">Email</div><div class="meta-val">half.note416@gmail.com</div></div>
+      </div>
+      <div class="meta-row">
+        <span class="meta-dash">—</span>
+        <div><div class="meta-label">After Hours (8pm – 8am)</div><div class="meta-val">Email us to confirm after-hours bookings</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-box">
+    <div class="form-title">Say hello.</div>
+    <div class="form-sub">Up to 100 guests · 3 hour minimum · We reply fast</div>
+    <div class="form-row">
+      <div class="form-field"><label>First Name</label><input type="text" placeholder="Jordan"></div>
+      <div class="form-field"><label>Last Name</label><input type="text" placeholder="Williams"></div>
+    </div>
+    <div class="form-field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+    <div class="form-row">
+      <div class="form-field"><label>Event Date</label><input type="date"></div>
+      <div class="form-field"><label>Guest Count</label>
+        <select>
+          <option>Under 25</option><option>25–50</option><option>50–100</option><option>100+</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field"><label>What's the occasion?</label>
+      <select>
+        <option>Birthday / Celebration</option>
+        <option>Baby Shower</option>
+        <option>Wedding Reception</option>
+        <option>Photo / Video Shoot</option>
+        <option>Corporate Event</option>
+        <option>Live Event / Show</option>
+        <option>Workshop / Class</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-field"><label>Tell us a little more</label>
+      <textarea placeholder="What are you planning? Any details, timing, or questions for us..."></textarea>
+    </div>
+    <button class="submit-btn">Send Inquiry →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand"><span class="f-dot"></span> Half Note</div>
+      <div class="footer-tag">Scarborough's warm, flexible event and studio space. Where communities celebrate, create, and connect.</div>
+      <div class="social-links">
+        <a class="social-link" href="https://www.instagram.com/half.note416/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="social-link" href="https://maps.google.com/maps?cid=0x89d4cf13ff8afb4f:0x95426595c14072a7" target="_blank" rel="noopener" aria-label="Google Business Profile">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm-1.393 17.241l-3.937-3.937 1.414-1.414 2.523 2.523 5.316-5.316 1.414 1.414-6.73 6.73z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Navigate</div>
+      <ul class="f-links">
+        <li><a href="#">The Space</a></li>
+        <li><a href="#">Event Types</a></li>
+        <li><a href="#">Book Now</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Find Us</div>
+      <ul class="f-links">
+        <li><a href="tel:4167072216">(416) 707-2216</a></li>
+        <li><a href="mailto:half.note416@gmail.com">half.note416@gmail.com</a></li>
+        <li><a href="#">3357 Kingston Rd</a></li>
+        <li><a href="#">Scarborough, ON M1M 1R3</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Half Note Event & Studio Space</span>
+    <span>Scarborough · Toronto · 416</span>
+  </div>
+</footer>
+
+<script>
+const wf=document.getElementById('waveform');
+for(let i=0;i<56;i++){
+  const b=document.createElement('div');
+  b.className='w-bar'+(i%7===3?' accent-bar':'');
+  b.style.animationDelay=Math.random()*1.3+'s';
+  b.style.animationDuration=(0.8+Math.random()*0.9)+'s';
+  wf.appendChild(b);
+}
+</script>
+</body>
+</html>
